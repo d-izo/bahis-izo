@@ -135,13 +135,13 @@ section#info{
 
 
 <main>
-	<section id="status">WELCOME!</section>
+	<section id="status">Hoşgeldin!</section>
 	<section id="Slots">
 		<div id="slot1" class="a1"></div>
 		<div id="slot2" class="a1"></div>
 		<div id="slot3" class="a1"></div>
 	</section>
-	<section onclick="doSlot()" id="Gira">TAKE A SPIN!</section>
+	<section onclick="doSlot()" id="Gira">SENDE ÇEVİR!</section>
 	<section id="options">
 		<img src="res/icons/audioOn.png" id="audio" class="option" onclick="toggleAudio()" />
 	</section>
@@ -175,7 +175,7 @@ function doSlot(){
 	var i2 = 0;
 	var i3 = 0;
 	var sound = 0
-	status.innerHTML = "SPINNING"
+	status.innerHTML = "DÖNDÜR"
 	slot1 = setInterval(spin1, 50);
 	slot2 = setInterval(spin2, 50);
 	slot3 = setInterval(spin3, 50);
@@ -238,10 +238,10 @@ function testWin(){
 		(slot1 == slot2 && slot1 == "a7") ||
 		(slot1 == slot3 && slot1 == "a7") ||
 		(slot2 == slot3 && slot2 == "a7") ) && !(slot1 == slot2 && slot2 == slot3 && slot1=="a7")){
-		status.innerHTML = "YOU WIN!";
+		status.innerHTML = "SEN KAZANDIN!";
 		win.play();
 	}else{
-		status.innerHTML = "YOU LOSE!"
+		status.innerHTML = "KAYBETTİN!"
 		lose.play();
 	}
 	doing = false;
