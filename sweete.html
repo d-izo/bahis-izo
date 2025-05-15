@@ -63,7 +63,7 @@
         }
 
         .navbar ul li a.active,
-        .navbar ul li a.hover {
+        .navbar ul li a:hover {
             background: #ff7b7b;
             border-radius: 2px;
         }
@@ -106,25 +106,20 @@
             background: #4d9dbf;
         }
 
-        /* Oyun Alanı */
-        /* Oyun Alanı */
-        /* Oyun Alanı */
         #grid {
             display: grid;
             grid-template-columns: repeat(6, 60px);
             grid-template-rows: repeat(5, 60px);
             gap: 5px;
-            background-color: transparent; /* Bu rengi container arka planıyla uyumlu olacak şekilde değiştirin */
+            background-color: transparent;
             padding: 10px;
             border-radius: 10px;
             position: relative;
             margin-top: 40px;
-            margin-left: 250px; /* Sağ tarafa kaydırmak için bu değeri artırabilirsiniz */
+            margin-left: 250px;
             margin-right: auto;
-            box-shadow: 0 0 0px rgba(0, 0, 0, 0.1); /* İsteğe bağlı: Daha iyi uyum için gölge ekleyin */
+            box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
         }
-
-
 
         .tile {
             width: 60px;
@@ -141,10 +136,10 @@
             transition: all 0.5s ease;
         }
 
-        /* Mesaj ve Butonlar */
         #result-message {
             text-align: center;
-            font-size: 20px;
+            font-size: 26px; /* Büyük font */
+            font-weight: bold; /* Kalın yazı */
             margin-top: 20px;
         }
 
@@ -224,7 +219,7 @@
 
             setTimeout(() => {
                 refillGrid();
-            }, 500); // Animasyon süresi
+            }, 500);
         }
 
         function refillGrid() {
@@ -236,7 +231,6 @@
                 tile.style.transform = `translateY(-500px)`;
                 grid.appendChild(tile);
 
-                // Düşme animasyonu
                 setTimeout(() => {
                     tile.style.transform = "translateY(0)";
                     tile.style.opacity = 1;
@@ -253,7 +247,7 @@
             let winnings = 0;
             for (let symbol in counts) {
                 if (counts[symbol] >= 8) {
-                    winnings += counts[symbol] * 5; // Ödül hesaplama
+                    winnings += counts[symbol] * 5;
                 }
             }
 
@@ -272,7 +266,6 @@
 
             dropTiles();
 
-            // 2 saniye bekle, kazançları hesapla
             setTimeout(() => {
                 const tiles = Array.from(document.querySelectorAll(".tile")).map(tile => tile.textContent);
                 const winnings = calculateWinnings(tiles);
@@ -287,12 +280,11 @@
                 }
 
                 balanceEl.textContent = balance;
-            }, 2000); // Animasyon süresi kadar bekle
+            }, 2000);
         }
 
         spinButton.addEventListener("click", spin);
 
-        // Başlangıç düzeni
         createInitialGrid();
     </script>
 
