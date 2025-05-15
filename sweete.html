@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUIZBET - Sweet Bonanza</title>
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: url('pngtree-dice-poker-casino-light-effect-background-picture-image_1597218.jpg');
+            height: 100vh;
+            background-size: 100% 100%;
+        }
+
+        .navbar {
+            width: 100%;
+            height: 80px;
+            background: rgb(192, 40, 53);
+        }
+
+        .navbar .logo {
+            display: inline-block;
+            margin-left: 20px;
+            margin-top: 25px;
+        }
+
+        .logo a {
+            color: azure;
+            font-size: 30px;
+            font-family: Arial;
+            text-decoration: none;
+            user-select: none;
+        }
+
+        .navbar ul {
+            float: right;
+            margin-right: 20px;
+            user-select: none;
+        }
+
+        .navbar ul li {
+            list-style: none;
+            display: inline-block;
+            margin: 0 8px;
+            line-height: 80px;
+            user-select: none;
+        }
+
+        .navbar ul li a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            font-size: 25px;
+            font-family: Arial;
+            padding: 6px 12px;
+            user-select: none;
+        }
+
+        .navbar ul li a.active,
+        .navbar ul li a.hover {
+            background: #ff7b7b;
+            border-radius: 2px;
+        }
+
+        .container .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: sans-serif;
+            user-select: none;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .center h1 {
+            color: black;
+            font-size: 70px;
+            font-weight: bold;
+        }
+
+        .center .buttons {
+            margin-top: 35px;
+        }
+
+        .buttons button {
+            height: 50px;
+            width: 150px;
+            font-size: 23px;
+            font-weight: bold;
+            color: black;
+            background: #4d9d;
+            border: 3px solid black;
+            cursor: pointer;
+            border-radius: 25px;
+        }
+
+        .buttons button:hover {
+            background: #4d9dbf;
+        }
+
+        /* Oyun Alanı */
+        /* Oyun Alanı */
+        /* Oyun Alanı */
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(6, 60px);
+            grid-template-rows: repeat(5, 60px);
+            gap: 5px;
+            background-color: transparent; /* Bu rengi container arka planıyla uyumlu olacak şekilde değiştirin */
+            padding: 10px;
+            border-radius: 10px;
+            position: relative;
+            margin-top: 40px;
+            margin-left: 250px; /* Sağ tarafa kaydırmak için bu değeri artırabilirsiniz */
+            margin-right: auto;
+            box-shadow: 0 0 0px rgba(0, 0, 0, 0.1); /* İsteğe bağlı: Daha iyi uyum için gölge ekleyin */
+        }
+
+
+
+        .tile {
+            width: 60px;
+            height: 60px;
+            background-color: #ff77a9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        /* Mesaj ve Butonlar */
+        #result-message {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .balance {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        button {
+            background-color: #f39c12;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <a href="index.html">TUIZBET</a>
+        </div>
+        <ul>
+            <li><a href="index.html">Ana sayfa</a></li>
+            <li><a href="oyunlar.html">Oyunlar</a></li>
+            <li><a href="index1.html">Öğretici</a></li>
+            <li><a href="index2.html">Hakkında</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="center">
+            <h1>Sweet Bonanza</h1>
+            <p>Bakiyeniz: <span id="balance" class="balance">1000</span> ₺</p>
+            <div>
+                <button id="spin-button">Çevir</button>
+            </div>
+            <div id="grid"></div>
+            <p id="result-message"></p>
+        </div>
+    </div>
+
+    <script>
+        const grid = document.getElementById("grid");
+        const balanceEl = document.getElementById("balance");
+        const resultMessage = document.getElementById("result-message");
+        const spinButton = document.getElementById("spin-button");
+
+        const symbols = ["🍓", "🍋", "🍇", "🍉", "🍍", "🍒"];
+        let balance = 1000;
+
+        function createInitialGrid() {
+            grid.innerHTML = "";
+            for (let i = 0; i < 30; i++) {
+                const tile = document.createElement("div");
+                tile.className = "tile";
+                tile.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                grid.appendChild(tile);
+            }
+        }
+
+        function dropTiles() {
+            const tiles = document.querySelectorAll(".tile");
+            tiles.forEach(tile => {
+                tile.style.transform = `translateY(500px)`;
+                tile.style.opacity = 0;
+            });
+
+            setTimeout(() => {
+                refillGrid();
+            }, 500); // Animasyon süresi
+        }
+
+        function refillGrid() {
+            grid.innerHTML = "";
+            for (let i = 0; i < 30; i++) {
+                const tile = document.createElement("div");
+                tile.className = "tile";
+                tile.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                tile.style.transform = `translateY(-500px)`;
+                grid.appendChild(tile);
+
+                // Düşme animasyonu
+                setTimeout(() => {
+                    tile.style.transform = "translateY(0)";
+                    tile.style.opacity = 1;
+                }, 50 * i);
+            }
+        }
+
+        function calculateWinnings(tiles) {
+            const counts = tiles.reduce((acc, symbol) => {
+                acc[symbol] = (acc[symbol] || 0) + 1;
+                return acc;
+            }, {});
+
+            let winnings = 0;
+            for (let symbol in counts) {
+                if (counts[symbol] >= 8) {
+                    winnings += counts[symbol] * 5; // Ödül hesaplama
+                }
+            }
+
+            return winnings;
+        }
+
+        function spin() {
+            if (balance < 10) {
+                resultMessage.textContent = "Yeterli bakiyeniz yok!";
+                resultMessage.style.color = "red";
+                return;
+            }
+
+            balance -= 10;
+            balanceEl.textContent = balance;
+
+            dropTiles();
+
+            // 2 saniye bekle, kazançları hesapla
+            setTimeout(() => {
+                const tiles = Array.from(document.querySelectorAll(".tile")).map(tile => tile.textContent);
+                const winnings = calculateWinnings(tiles);
+
+                if (winnings > 0) {
+                    balance += winnings;
+                    resultMessage.textContent = `Tebrikler! ${winnings} ₺ kazandınız!`;
+                    resultMessage.style.color = "green";
+                } else {
+                    resultMessage.textContent = "Kaybettiniz, şansınızı tekrar deneyin!";
+                    resultMessage.style.color = "red";
+                }
+
+                balanceEl.textContent = balance;
+            }, 2000); // Animasyon süresi kadar bekle
+        }
+
+        spinButton.addEventListener("click", spin);
+
+        // Başlangıç düzeni
+        createInitialGrid();
+    </script>
+
+</body>
+</html>

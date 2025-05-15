@@ -70,6 +70,14 @@
     width: 900px;
     text-align: center;
 }
+.center h2{
+    color:rgb(255, 255, 255);
+    font-size:20px;
+    font-weight: bold;
+    width: 900px;
+    text-align: center;
+}
+
 .center .buttons{
     margin:35px 280px;
 }
